@@ -19,12 +19,14 @@ class IosDriverConfig {
     val driver: IOSDriver by lazy {
         val cap = DesiredCapabilities().apply {
             setCapability(MobileCapabilityType.PLATFORM, "iOS")
-            setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.3")
-            setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME)
+            setCapability("platformVersion", "11.3")
+            setCapability("deviceName", DEVICE_NAME)
 //            setCapability(MobileCapabilityType.APP, APP_PATH)
 //            setCapability(MobileCapabilityType.AUTOMATION_NAME, TYPE_AUTOMATION)
-            setCapability("bundleId", "")
+//            setCapability("bundleId", "com.test.AutomationAppTest")
+            setCapability("app", "Users/wesley.silva/Library/Developer/Xcode/DerivedData/AutomationAppTest-bmbufymclmkineefbgjithqbanrp/Build/Products/Debug-iphonesimulator/AutomationAppTest.app" )
         }
+
         IOSDriver(URL(SERVER), cap)
     }
 
