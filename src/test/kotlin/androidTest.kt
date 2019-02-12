@@ -1,6 +1,7 @@
 import core.android.AndroidDriverConfig
 import core.ios.IosDriverConfig
 import core.robot.AndroidRobotCore
+import core.robot.GetDriver
 import core.robot.IOSRobotCore
 import core.robot.RobotCore
 import io.appium.java_client.MobileElement
@@ -23,14 +24,11 @@ class androidTest {
     private lateinit var robotCore: RobotCore
 
     @Before fun setup() {
-//        androidDriver = AndroidDriverConfig().driver
-        robotCore = IOSRobotCore(IosDriverConfig().driver)
+        robotCore = GetDriver.getDriver(GetDriver.IOS_DRIVER)
     }
 
     @After fun tearDown() {
-//        AndroidDriverConfig().getResetApp()
-
-        IosDriverConfig().getResetApp()
+        robotCore.reset()
     }
 
     @Test fun test() {

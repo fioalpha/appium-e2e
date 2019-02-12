@@ -1,9 +1,12 @@
 package core.robot
 
+import core.android.AndroidDriverConfig
+import core.ios.IosDriverConfig
 import io.appium.java_client.MobileBy
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.ios.IOSDriver
 import org.openqa.selenium.WebElement
+import java.util.concurrent.TimeUnit
 
 interface RobotCore {
 
@@ -14,11 +17,17 @@ interface RobotCore {
     fun matcherText(id: String, textToMatcher: String): Boolean
 
     fun scrollView(view: String)
+
+    fun reset()
 }
 
 class AndroidRobotCore(
-    private val driver: AndroidDriver
+    private val driver: AndroidDriver = AndroidDriverConfig().driver
 ): RobotCore {
+    override fun reset() {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
+        driver.resetApp()
+    }
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
@@ -46,8 +55,13 @@ class AndroidRobotCore(
 }
 
 class IOSRobotCore(
-    private val driver: IOSDriver
+    private val driver: IOSDriver = IosDriverConfig().driver
 ): RobotCore {
+
+    override fun reset() {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
+        driver.resetApp()
+    }
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
@@ -73,6 +87,21 @@ class IOSRobotCore(
         )
         //driver.scrollTo(view)
         //driver.swipe(200,200,260,260,1)
+    }
+
+}
+
+object GetDriver {
+
+    const val ANDROID_DRIVER = 1
+    const val IOS_DRIVER = 2
+
+    fun getDriver(type: Int): RobotCore {
+        return if(type == ANDROID_DRIVER) {
+            AndroidRobotCore()
+        } else {
+            IOSRobotCore()
+        }
     }
 
 }
