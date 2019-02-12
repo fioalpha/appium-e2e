@@ -23,6 +23,7 @@ class AndroidDriverConfig {
             setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME)
             setCapability(MobileCapabilityType.APP, File(APP_PATH))
             setCapability(MobileCapabilityType.AUTOMATION_NAME, TYPE_AUTOMATION)
+            setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60)
         }
         AndroidDriver(URL(SERVER), cap)
     }

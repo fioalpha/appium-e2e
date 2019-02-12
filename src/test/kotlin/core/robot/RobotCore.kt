@@ -5,20 +5,21 @@ import core.ios.IosDriverConfig
 import io.appium.java_client.MobileBy
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.ios.IOSDriver
+import org.junit.Assert
 import org.openqa.selenium.WebElement
 import java.util.concurrent.TimeUnit
 
 interface RobotCore {
 
-    fun fillEditText(id: String, text: String)
+    fun fillEditText(id: String, text: String): RobotCore
 
-    fun clickButton(id: String)
+    fun clickButton(id: String): RobotCore
 
-    fun matcherText(id: String, textToMatcher: String): Boolean
+    fun matcherText(id: String, textToMatcher: String): RobotCore
 
-    fun scrollView(view: String, text: String, action: (WebElement) -> Any)
+    fun scrollView(view: String, text: String, action: (WebElement) -> Any): RobotCore
 
-    fun reset()
+    fun reset(): RobotCore
 }
 
 class AndroidRobotCore(
@@ -27,27 +28,32 @@ class AndroidRobotCore(
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
-    override fun fillEditText(id: String, text: String) {
+    override fun fillEditText(id: String, text: String): RobotCore {
         getView(id).sendKeys(text)
+        return this
     }
 
-    override fun clickButton(id: String) {
+    override fun clickButton(id: String):RobotCore {
         getView(id).click()
         Thread.sleep(500)
+        return this
     }
 
-    override fun matcherText(id: String, textToMatcher: String): Boolean {
-        return getView(id).text == textToMatcher
+    override fun matcherText(id: String, textToMatcher: String): RobotCore {
+        Assert.assertTrue(getView(id).text == textToMatcher)
+        return this
     }
 
-    override fun scrollView(view: String, text: String, action: (WebElement) -> Any) {
-        val element = driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"2Churros\"));")
+    override fun scrollView(view: String, text: String, action: (WebElement) -> Any): RobotCore {
+        val element = driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"$text\"));")
         action(element)
+        return this
     }
 
-    override fun reset() {
+    override fun reset(): RobotCore {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
         driver.resetApp()
+        return this
     }
 
 }
@@ -56,47 +62,37 @@ class IOSRobotCore(
     private val driver: IOSDriver = IosDriverConfig().driver
 ): RobotCore {
 
-    override fun reset() {
+    override fun reset() : RobotCore {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
         driver.resetApp()
+        return this
     }
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
-    override fun fillEditText(id: String, text: String) {
+    override fun fillEditText(id: String, text: String) : RobotCore {
         getView(id).sendKeys(text)
+        return this
     }
 
-    override fun clickButton(id: String) {
+    override fun clickButton(id: String): RobotCore {
         getView(id).click()
         Thread.sleep(500)
+        return this
     }
 
-    override fun matcherText(id: String, textToMatcher: String): Boolean {
-        return getView(id).text == textToMatcher
+    override fun matcherText(id: String, textToMatcher: String): RobotCore {
+        Assert.assertTrue(getView(id).text == textToMatcher)
+        return this
     }
 
-    override fun scrollView(view: String, text: String, action: (WebElement) -> Any) {
+    override fun scrollView(view: String, text: String, action: (WebElement) -> Any): RobotCore {
         driver.findElement(
             MobileBy.AndroidUIAutomator(
                 "new UiScrollable(new UiSelector()).getChildByText(" + "new UiSelector().className(\"android.widget.Button\"), \"File Chooser + Filter\")"
             )
         )
-    }
-
-}
-
-object GetDriver {
-
-    const val ANDROID_DRIVER = 1
-    const val IOS_DRIVER = 2
-
-    fun getDriver(type: Int): RobotCore {
-        return if(type == ANDROID_DRIVER) {
-            AndroidRobotCore()
-        } else {
-            IOSRobotCore()
-        }
+        return this
     }
 
 }

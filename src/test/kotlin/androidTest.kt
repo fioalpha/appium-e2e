@@ -1,9 +1,10 @@
+import core.MainRobot
 import core.android.AndroidDriverConfig
 import core.ios.IosDriverConfig
 import core.robot.AndroidRobotCore
-import core.robot.GetDriver
 import core.robot.IOSRobotCore
 import core.robot.RobotCore
+import core.scroll
 import io.appium.java_client.MobileElement
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.remote.MobileCapabilityType
@@ -12,29 +13,21 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-import java.util.concurrent.TimeUnit
-import io.appium.java_client.MobileBy
-
-
-
 class androidTest {
-
-    private lateinit var androidDriver: AndroidDriver
-
     private lateinit var robotCore: RobotCore
 
     @Before fun setup() {
-        robotCore = GetDriver.getDriver(GetDriver.ANDROID_DRIVER)
+        robotCore = MainRobot()
     }
 
     @After fun tearDown() {
     }
 
     @Test fun test() {
-        robotCore.scrollView("android.widget.TextView", "Cachorro"){
-            it.click()
+        scroll {
+            scroll("Churros4444")
+            matcher()
         }
     }
-
 }
 
