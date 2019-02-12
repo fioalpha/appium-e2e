@@ -16,7 +16,7 @@ interface RobotCore {
 
     fun matcherText(id: String, textToMatcher: String): Boolean
 
-    fun scrollView(view: String)
+    fun scrollView(view: String, text: String, action: (WebElement) -> Any)
 
     fun reset()
 }
@@ -24,10 +24,6 @@ interface RobotCore {
 class AndroidRobotCore(
     private val driver: AndroidDriver = AndroidDriverConfig().driver
 ): RobotCore {
-    override fun reset() {
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
-        driver.resetApp()
-    }
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
@@ -44,12 +40,14 @@ class AndroidRobotCore(
         return getView(id).text == textToMatcher
     }
 
-    override fun scrollView(view: String) {
-        driver.findElement(
-            MobileBy.AndroidUIAutomator(
-                "new UiScrollable(new UiSelector()).getChildByText(" + "new UiSelector().className(\"android.widget.Button\"), \"File Chooser + Filter\")"
-            )
-        )
+    override fun scrollView(view: String, text: String, action: (WebElement) -> Any) {
+        val element = driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"2Churros\"));")
+        action(element)
+    }
+
+    override fun reset() {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
+        driver.resetApp()
     }
 
 }
@@ -78,7 +76,7 @@ class IOSRobotCore(
         return getView(id).text == textToMatcher
     }
 
-    override fun scrollView(view: String) {
+    override fun scrollView(view: String, text: String, action: (WebElement) -> Any) {
         driver.findElement(
             MobileBy.AndroidUIAutomator(
                 "new UiScrollable(new UiSelector()).getChildByText(" + "new UiSelector().className(\"android.widget.Button\"), \"File Chooser + Filter\")"

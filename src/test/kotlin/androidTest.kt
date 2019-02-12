@@ -28,17 +28,12 @@ class androidTest {
     }
 
     @After fun tearDown() {
-        robotCore.reset()
     }
 
     @Test fun test() {
-//        Assert.assertTrue(
-//            robotCore.matcherText("com.afollestad.materialdialogssample:id/basic_buttons", "Basic + Buttons")
-//        )
-
-        robotCore.scrollView("Button Callbacks")
-
-//        robotCore.clickButton("com.afollestad.materialdialogssample:id/basic_buttons")
+        robotCore.scrollView("android.widget.TextView", "Cachorro"){
+            it.click()
+        }
     }
 
 }
