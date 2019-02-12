@@ -38,7 +38,23 @@ class androidTest {
 //            robotCore.matcherText("com.afollestad.materialdialogssample:id/basic_buttons", "Basic + Buttons")
 //        )
 
-        robotCore.scrollView("Button Callbacks")
+        //robotCore.scrollView("Button Callbacks")
+        val isExpectedTextA = robotCore.matcherText("Home.cell.0.textLabel", "A")
+        val isExpectedTextB = robotCore.matcherText("Home.cell.1.textLabel", "B")
+        Assert.assertTrue(isExpectedTextA)
+        Assert.assertTrue(isExpectedTextB)
+//        robotCore.scrollView("Home.cell.5")
+        robotCore.clickButton("Home.cell.2")
+        val prefix = "DetailViewController"
+        val imageView= prefix + ".imageView"
+        val titleLabel= prefix + ".titleLabel"
+        val priceLabel= prefix + ".priceLabel"
+
+        val isExpectedTextForTitleLabel = robotCore.matcherText(titleLabel, "C")
+        val isExpectedTextForPriceLabel = robotCore.matcherText(priceLabel, "R$ 2,00")
+        Assert.assertTrue(isExpectedTextForTitleLabel)
+        Assert.assertTrue(isExpectedTextForPriceLabel)
+        robotCore.clickButton("${prefix}.backButton")
 
 //        robotCore.clickButton("com.afollestad.materialdialogssample:id/basic_buttons")
     }

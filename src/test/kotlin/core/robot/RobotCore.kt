@@ -61,6 +61,7 @@ class IOSRobotCore(
     }
 
     override fun matcherText(id: String, textToMatcher: String): Boolean {
+        print("texto: ${getView(id).text} \n")
         return getView(id).text == textToMatcher
     }
 
@@ -70,6 +71,8 @@ class IOSRobotCore(
                 "new UiScrollable(new UiSelector()).getChildByText(" + "new UiSelector().className(\"android.widget.Button\"), \"File Chooser + Filter\")"
             )
         )
+        //driver.scrollTo(view)
+        //driver.swipe(200,200,260,260,1)
     }
 
 }
