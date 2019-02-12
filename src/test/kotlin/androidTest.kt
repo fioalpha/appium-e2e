@@ -48,7 +48,7 @@ class androidTest {
         Assert.assertTrue(isExpectedTextA)
         Assert.assertTrue(isExpectedTextB)
 //        robotCore.scrollView("Home.cell.5")
-        val idCell = "Home.cell.20"
+        val idCell = "Home.cell.11"
         val isVisible = robotCore.isVisible(idCell)
         if (!isVisible) {
             robotCore.scrollView(idCell)
@@ -60,8 +60,8 @@ class androidTest {
         val titleLabel= prefix + ".titleLabel"
         val priceLabel= prefix + ".priceLabel"
 
-        val isExpectedTextForTitleLabel = robotCore.matcherText(titleLabel, "C")
-        val isExpectedTextForPriceLabel = robotCore.matcherText(priceLabel, "R$ 2,00")
+        val isExpectedTextForTitleLabel = robotCore.matcherText(titleLabel, "L")
+        val isExpectedTextForPriceLabel = robotCore.matcherText(priceLabel, "R$ 11,00")
         Assert.assertTrue(isExpectedTextForTitleLabel)
         Assert.assertTrue(isExpectedTextForPriceLabel)
 
