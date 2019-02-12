@@ -46,7 +46,7 @@ class androidTest {
 //          robotCore.clickButton("Home.cell.3")
 //          robotCore.clickButton("confirmButton")
 //          robotCore.clickButton("Home")
-        robotCore.scrollView("")
+        robotCore.scrollView("Home.cell.11")
 
 //        robotCore.clickButton("com.afollestad.materialdialogssample:id/basic_buttons")
     }
