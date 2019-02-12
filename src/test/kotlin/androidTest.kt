@@ -42,7 +42,12 @@ class androidTest {
         Assert.assertTrue(isExpectedTextA)
         Assert.assertTrue(isExpectedTextB)
 //        robotCore.scrollView("Home.cell.5")
-        robotCore.clickButton("Home.cell.2")
+        val isVisible = robotCore.isVisible("Home.cell.24")
+        if (!isVisible) {
+            return
+        }
+        robotCore.clickButton("Home.cell.24")
+        //robotCore.clickButton("Home.cell.2")
         val prefix = "DetailViewController"
         val imageView= prefix + ".imageView"
         val titleLabel= prefix + ".titleLabel"
@@ -52,7 +57,11 @@ class androidTest {
         val isExpectedTextForPriceLabel = robotCore.matcherText(priceLabel, "R$ 2,00")
         Assert.assertTrue(isExpectedTextForTitleLabel)
         Assert.assertTrue(isExpectedTextForPriceLabel)
-        robotCore.clickButton("${prefix}.backButton")
+
+        robotCore.clickButton("Home")
+
+        //robotCore.clickButton("${prefix}.confirmButton")
+        //robotCore.clickButton("${prefix}.backButton")
 
 //        robotCore.clickButton("com.afollestad.materialdialogssample:id/basic_buttons")
     }

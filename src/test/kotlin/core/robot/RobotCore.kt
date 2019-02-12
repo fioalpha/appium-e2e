@@ -19,6 +19,8 @@ interface RobotCore {
     fun scrollView(view: String)
 
     fun reset()
+
+    fun isVisible(id: String): Boolean
 }
 
 class AndroidRobotCore(
@@ -52,6 +54,9 @@ class AndroidRobotCore(
         )
     }
 
+    override fun isVisible(id: String): Boolean {
+        return true
+    }
 }
 
 class IOSRobotCore(
@@ -87,6 +92,10 @@ class IOSRobotCore(
         )
         //driver.scrollTo(view)
         //driver.swipe(200,200,260,260,1)
+    }
+
+    override fun isVisible(id: String): Boolean {
+        return getView(id).isDisplayed
     }
 
 }
