@@ -14,6 +14,12 @@ import org.junit.Test
 
 import java.util.concurrent.TimeUnit
 import io.appium.java_client.MobileBy
+import io.appium.java_client.TouchAction
+import java.rmi.server.RemoteObject
+import java.util.HashMap
+import org.openqa.selenium.By
+import org.openqa.selenium.remote.RemoteWebElement
+
 
 
 
@@ -42,11 +48,12 @@ class androidTest {
         Assert.assertTrue(isExpectedTextA)
         Assert.assertTrue(isExpectedTextB)
 //        robotCore.scrollView("Home.cell.5")
-        val isVisible = robotCore.isVisible("Home.cell.24")
+        val idCell = "Home.cell.20"
+        val isVisible = robotCore.isVisible(idCell)
         if (!isVisible) {
-            return
+            robotCore.scrollView(idCell)
         }
-        robotCore.clickButton("Home.cell.24")
+        robotCore.clickButton(idCell)
         //robotCore.clickButton("Home.cell.2")
         val prefix = "DetailViewController"
         val imageView= prefix + ".imageView"
