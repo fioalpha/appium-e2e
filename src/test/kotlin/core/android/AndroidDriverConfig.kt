@@ -13,7 +13,7 @@ class AndroidDriverConfig {
     companion object {
         private const val SERVER = "http://127.0.0.1:4723/wd/hub"
         private const val DEVICE_NAME = "Android Device"
-        private const val APP_PATH = "https://github.com/afollestad/material-dialogs/raw/master/sample/sample.apk"
+        private const val APP_PATH = "app-debug.apk"
         private const val TYPE_AUTOMATION = "UiAutomator2"
     }
 
