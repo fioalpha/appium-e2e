@@ -9,10 +9,18 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class MainRobot:RobotCore by RobotCoreFactory().getInstance() {
-    fun scroll(test: String) {
-        scrollView("", test) {
-            it.click()
-        }
+    lateinit var items: HashMap<*, *>
+
+    fun scroll() {
+        scrollView("", getViewItem(
+            "scrollTo", items
+        ))
+    }
+
+    fun click() {
+        clickButton(getViewItem(
+            "scrollTo", items
+        ))
     }
 
 }
@@ -22,13 +30,16 @@ class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
     lateinit var items: HashMap<*, *>
 
     fun matcherContent(){
-        matcherText(getViewItem("title", items), "Churros4444")
-        matcherText(getViewItem("cost", items), "R\$ 2,00")
+        matcherText(getViewItem("title", items), "L")
+        matcherText(getViewItem("cost", items), "R\$ 11,00")
     }
 }
 private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
 
-fun mainPage(func: MainRobot.() -> Unit) = MainRobot().apply { func() }
+fun mainPage(item: HashMap<*,*>, func: MainRobot.() -> Unit) = MainRobot().apply {
+    items = item
+    func()
+}
 
 fun detailsPage(item: HashMap<*,*>, func: DetailsRobot.() -> Unit) = DetailsRobot().apply {
     items = item

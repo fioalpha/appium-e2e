@@ -13,12 +13,15 @@ import org.junit.Test
 
 class FlowTest {
 
+    val main = json("main.json")
+
     @Test fun test() {
         detailsPage(json("details.json")) {
-            mainPage {
-                scroll("Churros4444")
+            mainPage(main) {
+                scroll()
+                click()
             }
-            matcherContent()
+//            matcherContent()
         }
     }
 
