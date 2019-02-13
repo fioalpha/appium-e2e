@@ -37,26 +37,22 @@ class androidTest {
         robotCore.reset()
     }
 
-    @Test fun test() {
-//        Assert.assertTrue(
-//            robotCore.matcherText("com.afollestad.materialdialogssample:id/basic_buttons", "Basic + Buttons")
-//        )
+    @Test fun testIOS() {
 
-        //robotCore.scrollView("Button Callbacks")
         val isExpectedTextA = robotCore.matcherText("Home.cell.0.textLabel", "A")
         val isExpectedTextB = robotCore.matcherText("Home.cell.1.textLabel", "B")
         Assert.assertTrue(isExpectedTextA)
         Assert.assertTrue(isExpectedTextB)
-//        robotCore.scrollView("Home.cell.5")
         val idCell = "Home.cell.11"
         val isVisible = robotCore.isVisible(idCell)
         if (!isVisible) {
             robotCore.scrollView(idCell)
         }
         robotCore.clickButton(idCell)
-        //robotCore.clickButton("Home.cell.2")
+
+
         val prefix = "DetailViewController"
-        val imageView= prefix + ".imageView"
+        
         val titleLabel= prefix + ".titleLabel"
         val priceLabel= prefix + ".priceLabel"
 
