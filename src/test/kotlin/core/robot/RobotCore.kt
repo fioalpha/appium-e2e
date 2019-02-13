@@ -24,6 +24,8 @@ interface RobotCore {
     fun scrollView(view: String)
 
     fun reset()
+
+    fun isVisible(id: String): Boolean
 }
 
 class AndroidRobotCore(
@@ -57,6 +59,9 @@ class AndroidRobotCore(
         )
     }
 
+    override fun isVisible(id: String): Boolean {
+        return true
+    }
 }
 
 class IOSRobotCore(
@@ -82,7 +87,12 @@ class IOSRobotCore(
     }
 
     override fun matcherText(id: String, textToMatcher: String): Boolean {
+        print("texto: ${getView(id).text} \n")
         return getView(id).text == textToMatcher
+    }
+
+    override fun isVisible(id: String): Boolean {
+        return getView(id).isDisplayed
     }
 
     override fun scrollView(view: String) {
@@ -97,14 +107,7 @@ class IOSRobotCore(
         // Use the predicate that provides the value of the label attribute
         scrollObject["predicateString"] = "name == '$view'"
         driver.executeScript("mobile:scroll", scrollObject)  // scroll to the target element
-//
-//
-//        MobileBy.IosUIAutomation(
-//            ""
-//        )
-//            MobileBy.AndroidUIAutomator(
-//                "new UiScrollable(new UiSelector()).getChildByText(" + "new UiSelector().className(\"android.widget.Button\"), \"File Chooser + Filter\")"
-//            )
+
     }
 
 }

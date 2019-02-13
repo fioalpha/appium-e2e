@@ -37,16 +37,34 @@ class androidTest {
         robotCore.reset()
     }
 
-    @Test fun test() {
-//        Assert.assertTrue(
-//            robotCore.matcherText("com.afollestad.materialdialogssample:id/basic_buttons", "Basic + Buttons")
-//        )
+    @Test fun testIOS() {
 
-//        robotCore.scrollView("Button Callbacks")
-//          robotCore.clickButton("Home.cell.3")
-//          robotCore.clickButton("confirmButton")
-//          robotCore.clickButton("Home")
-        robotCore.scrollView("Home.cell.11")
+        val isExpectedTextA = robotCore.matcherText("Home.cell.0.textLabel", "A")
+        val isExpectedTextB = robotCore.matcherText("Home.cell.1.textLabel", "B")
+        Assert.assertTrue(isExpectedTextA)
+        Assert.assertTrue(isExpectedTextB)
+        val idCell = "Home.cell.11"
+        val isVisible = robotCore.isVisible(idCell)
+        if (!isVisible) {
+            robotCore.scrollView(idCell)
+        }
+        robotCore.clickButton(idCell)
+
+
+        val prefix = "DetailViewController"
+        
+        val titleLabel= prefix + ".titleLabel"
+        val priceLabel= prefix + ".priceLabel"
+
+        val isExpectedTextForTitleLabel = robotCore.matcherText(titleLabel, "L")
+        val isExpectedTextForPriceLabel = robotCore.matcherText(priceLabel, "R$ 11,00")
+        Assert.assertTrue(isExpectedTextForTitleLabel)
+        Assert.assertTrue(isExpectedTextForPriceLabel)
+
+        robotCore.clickButton("Home")
+
+        //robotCore.clickButton("${prefix}.confirmButton")
+        //robotCore.clickButton("${prefix}.backButton")
 
 //        robotCore.clickButton("com.afollestad.materialdialogssample:id/basic_buttons")
     }
