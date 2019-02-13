@@ -16,7 +16,7 @@ object IosDriverConfig {
 
     val driver: IOSDriver by lazy {
         val cap = DesiredCapabilities().apply {
-            setCapability("platformName", "iOS")
+            setCapability(MobileCapabilityType.PLATFORM, "iOS")
             setCapability("platformVersion", "12.1")
             setCapability("deviceName", DEVICE_NAME)
 //            setCapability(MobileCapabilityType.APP, APP_PATH)
