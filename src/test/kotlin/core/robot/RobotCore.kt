@@ -71,8 +71,6 @@ class IOSRobotCore(
 ): RobotCore {
     override fun clickButton(id: String) = apply {
         getView(id).click()
-        driver.findElementByAccessibilityId("Home.cell").click()
-        driver.findElementByAccessibilityId(id).click()
     }
 
     override fun scrollView(view: String, text: String, action: (WebElement) -> Any) = apply {
@@ -102,6 +100,7 @@ class IOSRobotCore(
 
 
     override fun matcherText(id: String, textToMatcher: String) = apply {
+        print("text: ${getView(id).text}")
         Assert.assertTrue(getView(id).text == textToMatcher)
     }
 
