@@ -34,7 +34,7 @@ class androidTest {
         robotCore.matcherText("Home.cell.1.textLabel", "B")
 
         val idCell = "Home.cell.11"
-        robotCore.isVisible(idCell)
+        //robotCore.isVisible(idCell)
         robotCore.scrollView("", idCell)
         robotCore.clickButton(idCell)
 

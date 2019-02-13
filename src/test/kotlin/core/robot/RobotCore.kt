@@ -85,7 +85,7 @@ class IOSRobotCore(
         scrollObject["element"] = parentID
 
         // Use the predicate that provides the value of the label attribute
-        scrollObject["predicateString"] = "name == '$view'"
+        scrollObject["predicateString"] = "name == '$text'"
         driver.executeScript("mobile:scroll", scrollObject)  // scroll to the target element
     }
 
