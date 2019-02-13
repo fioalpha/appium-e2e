@@ -3,24 +3,37 @@ package core
 import core.robot.AndroidRobotCore
 import core.robot.IOSRobotCore
 import core.robot.RobotCore
+import json
 import java.io.FileInputStream
 import java.util.*
+import kotlin.collections.HashMap
 
 class MainRobot:RobotCore by RobotCoreFactory().getInstance() {
-
-    fun scroll(test: String) = scrollView("", test) {
-        it.click()
+    fun scroll(test: String) {
+        scrollView("", test) {
+            it.click()
+        }
     }
 
 }
 
+class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
+
+    lateinit var items: HashMap<*, *>
+
+    fun matcherContent(){
+        matcherText(getViewItem("title", items), "Churros4444")
+        matcherText(getViewItem("cost", items), "R\$ 2,00")
+    }
+}
+private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
+
 fun mainPage(func: MainRobot.() -> Unit) = MainRobot().apply { func() }
 
-class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
-    fun matcherContent() = matcherText("br.com.netchurros:id/detail_name_textView", "Churros4444")
+fun detailsPage(item: HashMap<*,*>, func: DetailsRobot.() -> Unit) = DetailsRobot().apply {
+    items = item
+    func()
 }
-
-fun detailsPage(func: DetailsRobot.() -> Unit) = DetailsRobot().apply { func() }
 
 class RobotCoreFactory{
     fun getInstance(): RobotCore{
@@ -41,4 +54,6 @@ fun getEnvironment(): String{
         "android"
     }
 }
+
+
 

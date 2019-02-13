@@ -23,76 +23,62 @@ interface RobotCore {
 }
 
 class AndroidRobotCore(
-    private val driver: AndroidDriver = AndroidDriverConfig().driver
+    private val driver: AndroidDriver = AndroidDriverConfig.driver
 ): RobotCore {
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
-    override fun fillEditText(id: String, text: String): RobotCore {
+    override fun fillEditText(id: String, text: String) = apply {
         getView(id).sendKeys(text)
-        return this
     }
 
-    override fun clickButton(id: String):RobotCore {
+    override fun clickButton(id: String) = apply {
         getView(id).click()
-        return this
     }
 
-    override fun matcherText(id: String, textToMatcher: String): RobotCore {
+    override fun matcherText(id: String, textToMatcher: String) = apply {
+        print(id)
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
         Assert.assertTrue(getView(id).text == textToMatcher)
-        return this
     }
 
-    override fun scrollView(view: String, text: String, action: (WebElement) -> Any): RobotCore {
+    override fun scrollView(view: String, text: String, action: (WebElement) -> Any) = apply {
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
         val element = driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"$text\"));")
         action(element)
-        return this
     }
 
-    override fun reset(): RobotCore {
+    override fun reset() = apply {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
         driver.resetApp()
-        return this
     }
 
 }
 
 class IOSRobotCore(
-    private val driver: IOSDriver = IosDriverConfig().driver
+    private val driver: IOSDriver = IosDriverConfig.driver
 ): RobotCore {
 
-    override fun reset() : RobotCore {
+    override fun reset() = apply {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
         driver.resetApp()
-        return this
     }
 
     private fun getView(id: String): WebElement = driver.findElementById(id)
 
-    override fun fillEditText(id: String, text: String) : RobotCore {
+    override fun fillEditText(id: String, text: String) = apply {
         getView(id).sendKeys(text)
-        return this
     }
 
-    override fun clickButton(id: String): RobotCore {
+    override fun clickButton(id: String) = apply {
         getView(id).click()
-        Thread.sleep(500)
-        return this
     }
 
-    override fun matcherText(id: String, textToMatcher: String): RobotCore {
+    override fun matcherText(id: String, textToMatcher: String) = apply {
         Assert.assertTrue(getView(id).text == textToMatcher)
-        return this
     }
 
-    override fun scrollView(view: String, text: String, action: (WebElement) -> Any): RobotCore {
-        driver.findElement(
-            MobileBy.AndroidUIAutomator(
-                "new UiScrollable(new UiSelector()).getChildByText(" + "new UiSelector().className(\"android.widget.Button\"), \"File Chooser + Filter\")"
-            )
-        )
-        return this
+    override fun scrollView(view: String, text: String, action: (WebElement) -> Any) = apply {
     }
 
 }
