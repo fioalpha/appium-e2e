@@ -12,10 +12,15 @@ class MainRobot:RobotCore by RobotCoreFactory().getInstance() {
         it.click()
     }
 
-    fun matcher() = matcherText("br.com.netchurros:id/detail_name_textView", "Churros4444")
 }
 
-fun scroll(func: MainRobot.() -> Unit) = MainRobot().apply { func() }
+fun mainPage(func: MainRobot.() -> Unit) = MainRobot().apply { func() }
+
+class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
+    fun matcherContent() = matcherText("br.com.netchurros:id/detail_name_textView", "Churros4444")
+}
+
+fun detailsPage(func: DetailsRobot.() -> Unit) = DetailsRobot().apply { func() }
 
 class RobotCoreFactory{
     fun getInstance(): RobotCore{

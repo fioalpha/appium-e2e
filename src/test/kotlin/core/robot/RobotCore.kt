@@ -35,7 +35,6 @@ class AndroidRobotCore(
 
     override fun clickButton(id: String):RobotCore {
         getView(id).click()
-        Thread.sleep(500)
         return this
     }
 
@@ -45,6 +44,7 @@ class AndroidRobotCore(
     }
 
     override fun scrollView(view: String, text: String, action: (WebElement) -> Any): RobotCore {
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
         val element = driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(\"$text\"));")
         action(element)
         return this
