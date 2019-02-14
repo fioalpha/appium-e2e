@@ -22,6 +22,7 @@ class FlowTest {
                 scroll()
                 click()
             }
+         fillTextField()
          clickBack()
         }
     }

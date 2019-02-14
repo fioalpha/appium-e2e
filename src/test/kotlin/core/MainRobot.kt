@@ -40,6 +40,12 @@ class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
             "back", items
         ))
     }
+
+    fun fillTextField() {
+        fillEditText(getViewItem(
+            "textField", items
+        ), "Raqueta do guda")
+    }
 }
 private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
 

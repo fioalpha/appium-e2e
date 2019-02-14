@@ -1,5 +1,6 @@
 {
   "title": "Home.cell.11.textLabel",
   "cost": "Home.cell.11.detailTextLabel",
-  "back": "DetailViewController.confirmButton"
+  "back": "DetailViewController.confirmButton",
+  "textField": "DetailViewController.textField"
 }
