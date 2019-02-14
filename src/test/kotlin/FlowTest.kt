@@ -14,23 +14,29 @@ class FlowTest {
     val detail = json("details.json")
     val tabbar = json("tabbar.json")
     val more = json("more.json")
+    val loginOption = json("loginOption.json")
 
-    @Test fun test() {
+    @Test
+    fun test() {
         detailsPage(detail) {
             mainPage(main) {
                 scroll()
                 click()
             }
-         clickBack()
+            clickBack()
         }
     }
 
-    @Test fun testLogin() {
-        morePage(more) {
-          tabbarPage(tabbar) {
-              clickMore()
-          }
-            clickLogin()
+    @Test
+    fun testLogin() {
+        loginOptionPage(loginOption) {
+            morePage(more) {
+                tabbarPage(tabbar) {
+                    clickMore()
+                }
+                clickLogin()
+            }
+            clickNetshoesLogin()
         }
     }
 
@@ -38,7 +44,7 @@ class FlowTest {
 
 fun Any.json(nameFile: String): HashMap<*, *> {
     val environment = getEnvironment()
-    val text  = this.javaClass.getResource("$environment/$nameFile").readText()
+    val text = this.javaClass.getResource("$environment/$nameFile").readText()
     return Gson().fromJson(text, HashMap::class.java)
 }
 

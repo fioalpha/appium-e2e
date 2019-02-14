@@ -67,6 +67,17 @@ class MoreRobot: RobotCore by RobotCoreFactory().getInstance() {
     }
 }
 
+class LoginOptionRobot: RobotCore by RobotCoreFactory().getInstance() {
+
+    lateinit var items: HashMap<*, *>
+
+    fun clickNetshoesLogin() {
+        clickButton( getViewItem(
+            "netshoesLogin", items
+        ))
+    }
+}
+
 private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
 
 fun mainPage(item: HashMap<*,*>, func: MainRobot.() -> Unit) = MainRobot().apply {
@@ -85,6 +96,11 @@ fun tabbarPage(item: HashMap<*,*>, func: TabbarRobot.() -> Unit) = TabbarRobot()
 }
 
 fun morePage(item: HashMap<*,*>, func: MoreRobot.() -> Unit) = MoreRobot().apply {
+    items = item
+    func()
+}
+
+fun loginOptionPage(item: HashMap<*,*>, func: LoginOptionRobot.() -> Unit) = LoginOptionRobot().apply {
     items = item
     func()
 }
