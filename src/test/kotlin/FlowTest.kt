@@ -13,6 +13,7 @@ class FlowTest {
     val main = json("main.json")
     val detail = json("details.json")
     val tabbar = json("tabbar.json")
+    val more = json("more.json")
 
     @Test fun test() {
         detailsPage(detail) {
@@ -25,8 +26,11 @@ class FlowTest {
     }
 
     @Test fun testLogin() {
-        tabbarPage(tabbar) {
-            clickMore()
+        morePage(more) {
+          tabbarPage(tabbar) {
+              clickMore()
+          }
+            clickLogin()
         }
     }
 

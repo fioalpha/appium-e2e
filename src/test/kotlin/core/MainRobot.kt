@@ -6,7 +6,9 @@ import core.robot.RobotCore
 import json
 import java.io.FileInputStream
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
+import kotlin.concurrent.thread
 
 class MainRobot:RobotCore by RobotCoreFactory().getInstance() {
     lateinit var items: HashMap<*, *>
@@ -47,8 +49,20 @@ class TabbarRobot: RobotCore by RobotCoreFactory().getInstance() {
     lateinit var items: HashMap<*, *>
 
     fun clickMore() {
+        Thread.sleep(500)
         clickButton( getViewItem(
             "more", items
+        ))
+    }
+}
+
+class MoreRobot: RobotCore by RobotCoreFactory().getInstance() {
+
+    lateinit var items: HashMap<*, *>
+
+    fun clickLogin() {
+        clickButton( getViewItem(
+            "login", items
         ))
     }
 }
@@ -66,6 +80,11 @@ fun detailsPage(item: HashMap<*,*>, func: DetailsRobot.() -> Unit) = DetailsRobo
 }
 
 fun tabbarPage(item: HashMap<*,*>, func: TabbarRobot.() -> Unit) = TabbarRobot().apply {
+    items = item
+    func()
+}
+
+fun morePage(item: HashMap<*,*>, func: MoreRobot.() -> Unit) = MoreRobot().apply {
     items = item
     func()
 }
