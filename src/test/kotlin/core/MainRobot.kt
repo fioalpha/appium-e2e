@@ -19,9 +19,10 @@ class MainRobot:RobotCore by RobotCoreFactory().getInstance() {
 
     fun click() {
         clickButton(getViewItem(
-            "scrollTo", items
+            "select", items
         ))
     }
+
 
 }
 
@@ -32,6 +33,12 @@ class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
     fun matcherContent(){
         matcherText(getViewItem("title", items), "L")
         matcherText(getViewItem("cost", items), "R\$ 11,00")
+    }
+
+    fun clickBack() {
+        clickButton( getViewItem(
+            "back", items
+        ))
     }
 }
 private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
