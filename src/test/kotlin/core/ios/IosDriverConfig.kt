@@ -21,7 +21,7 @@ object IosDriverConfig {
             setCapability("deviceName", DEVICE_NAME)
 //            setCapability(MobileCapabilityType.APP, APP_PATH)
 //            setCapability(MobileCapabilityType.AUTOMATION_NAME, TYPE_AUTOMATION)
-            setCapability("bundleId", "com.test.AutomationAppTest")
+            setCapability("bundleId", "br.com.netshoesapp")
 //            setCapability("app", "Users/wesley.silva/Library/Developer/Xcode/DerivedData/AutomationAppTest-bmbufymclmkineefbgjithqbanrp/Build/Products/Debug-iphonesimulator/AutomationAppTest.app" )
         }
 

@@ -41,6 +41,18 @@ class DetailsRobot: RobotCore by RobotCoreFactory().getInstance() {
         ))
     }
 }
+
+class TabbarRobot: RobotCore by RobotCoreFactory().getInstance() {
+
+    lateinit var items: HashMap<*, *>
+
+    fun clickMore() {
+        clickButton( getViewItem(
+            "more", items
+        ))
+    }
+}
+
 private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
 
 fun mainPage(item: HashMap<*,*>, func: MainRobot.() -> Unit) = MainRobot().apply {
@@ -49,6 +61,11 @@ fun mainPage(item: HashMap<*,*>, func: MainRobot.() -> Unit) = MainRobot().apply
 }
 
 fun detailsPage(item: HashMap<*,*>, func: DetailsRobot.() -> Unit) = DetailsRobot().apply {
+    items = item
+    func()
+}
+
+fun tabbarPage(item: HashMap<*,*>, func: TabbarRobot.() -> Unit) = TabbarRobot().apply {
     items = item
     func()
 }

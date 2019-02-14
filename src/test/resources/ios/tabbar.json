@@ -1,0 +1,7 @@
+{
+  "home": "UITabBar.Home",
+  "category": "UITabBar.Categories",
+  "search": "UITabBar.Search",
+  "cart": "UITabBar.Cart",
+  "more": "UITabBar.More"
+}

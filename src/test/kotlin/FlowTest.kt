@@ -1,10 +1,7 @@
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import core.MainRobot
-import core.detailsPage
-import core.getEnvironment
+import core.*
 import core.robot.RobotCore
-import core.mainPage
 import core.manager.TE
 import core.manager.ViewProperties
 import org.junit.After
@@ -15,6 +12,7 @@ class FlowTest {
 
     val main = json("main.json")
     val detail = json("details.json")
+    val tabbar = json("tabbar.json")
 
     @Test fun test() {
         detailsPage(detail) {
@@ -23,6 +21,12 @@ class FlowTest {
                 click()
             }
          clickBack()
+        }
+    }
+
+    @Test fun testLogin() {
+        tabbarPage(tabbar) {
+            clickMore()
         }
     }
 
