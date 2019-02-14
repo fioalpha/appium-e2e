@@ -1,0 +1,5 @@
+{
+  "userField": "loginViewController.emailTextField",
+  "passwordField": "loginViewController.passwordTextField",
+  "enterButton": "loginViewController.loginButton"
+}

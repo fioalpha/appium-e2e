@@ -15,6 +15,7 @@ class FlowTest {
     val tabbar = json("tabbar.json")
     val more = json("more.json")
     val loginOption = json("loginOption.json")
+    val netshoesLogin = json("netshoesLogin.json")
 
     @Test
     fun test() {
@@ -29,14 +30,19 @@ class FlowTest {
 
     @Test
     fun testLogin() {
-        loginOptionPage(loginOption) {
-            morePage(more) {
-                tabbarPage(tabbar) {
-                    clickMore()
+        netshoesLoginPage(netshoesLogin) {
+            loginOptionPage(loginOption) {
+                morePage(more) {
+                    tabbarPage(tabbar) {
+                        clickMore()
+                    }
+                    clickLogin()
                 }
-                clickLogin()
+                clickNetshoesLogin()
             }
-            clickNetshoesLogin()
+            fillUserField()
+            fillPasswordField()
+            clickEnter()
         }
     }
 

@@ -78,6 +78,26 @@ class LoginOptionRobot: RobotCore by RobotCoreFactory().getInstance() {
     }
 }
 
+class NetshoesLoginRobot: RobotCore by RobotCoreFactory().getInstance() {
+
+    lateinit var items: HashMap<*, *>
+
+    fun fillUserField() {
+        fillEditText(getViewItem("userField", items), "teste@mailinator.com")
+    }
+
+    fun fillPasswordField() {
+        fillEditText(getViewItem("passwordField", items), "123456")
+    }
+
+    fun clickEnter() {
+        clickButton( getViewItem(
+            "enterButton", items
+        ))
+    }
+}
+
+
 private fun getViewItem(key: String, idItems: HashMap<*, *>): String =  idItems[key] as String
 
 fun mainPage(item: HashMap<*,*>, func: MainRobot.() -> Unit) = MainRobot().apply {
@@ -101,6 +121,11 @@ fun morePage(item: HashMap<*,*>, func: MoreRobot.() -> Unit) = MoreRobot().apply
 }
 
 fun loginOptionPage(item: HashMap<*,*>, func: LoginOptionRobot.() -> Unit) = LoginOptionRobot().apply {
+    items = item
+    func()
+}
+
+fun netshoesLoginPage(item: HashMap<*,*>, func: NetshoesLoginRobot.() -> Unit) = NetshoesLoginRobot().apply {
     items = item
     func()
 }

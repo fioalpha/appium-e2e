@@ -97,6 +97,7 @@ class IOSRobotCore(
 
     override fun fillEditText(id: String, text: String) = apply {
         getView(id).sendKeys(text)
+        driver.hideKeyboard()
     }
 
 
